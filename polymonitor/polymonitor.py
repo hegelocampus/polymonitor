@@ -3,6 +3,7 @@
 import argparse as ap
 from requests import get, codes
 from requests.exceptions import MissingSchema
+from termcolor import colored
 
 
 def make_value_dict(is_symbolic):
@@ -75,7 +76,11 @@ def main():
                     failed.append(url)
 
             count_str = f"{val_dict[True]}: {count[0]}"
-            failed_str = f"{val_dict[False]}: {' '.join(failed)}"
+            failed_str = val_dict[False] + ': '
+            if failed:
+                failed_str = colored(failed_str + ' '.join(failed), 'red')
+            else:
+                failed_str += '0'
             res = count_str + " " + failed_str
         else:
             res = ' '.join(list(
