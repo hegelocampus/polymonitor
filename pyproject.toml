@@ -7,6 +7,7 @@ authors = ["Bee <pizzaman8099@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 argparse = "^1.4.0"
+requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
