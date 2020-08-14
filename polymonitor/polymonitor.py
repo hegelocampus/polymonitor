@@ -2,7 +2,8 @@
 
 import argparse as ap
 from requests import get, codes
-from requests.exceptions import MissingSchema
+from requests.exceptions import InvalidURL
+from validators import url as valid_url
 from termcolor import colored
 
 
@@ -20,10 +21,12 @@ def get_status_code(url):
     Gets the current status code of a full url or short url. Short urls will
     be prepended with https.
     """
-    try:
+    if valid_url(url):
         return get(url).status_code
-    except MissingSchema:
-        return get_status_code("https://" + url)
+    elif valid_url("https://" + url):
+        return get("https://" + url).status_code
+    else:
+        raise InvalidURL(f"{url} isn't a valid URL!")
 
 
 def count_stats(acc, is_ok):
@@ -91,9 +94,8 @@ def main():
     else:
         res = "Please pass in valid urls you would like to monitor"
 
-    print(res)
     return res
 
 
 if __name__ == '__main__':
-    main()
+    print(main())
