@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse as ap
-from functools import reduce
 from requests import get, codes
 from requests.exceptions import MissingSchema
 
 
 def make_value_dict(is_symbolic):
     map_to_res = {
-        True: 'f062'.decode('hex') if is_symbolic else "Up",
-        False: 'f98d'.decode('hex') if is_symbolic else "Down"
+        True: "\uf062" if is_symbolic else "Up",
+        False: "\uf98d" if is_symbolic else "Down"
     }
 
     return map_to_res
@@ -41,19 +40,22 @@ def main():
         '-s',
         '--symbolic',
         help='Displays the results as symbols',
-        action='store_true')
+        action='store_true'
+    )
     parser.add_argument(
         '-c',
         '--compact',
         help='Reduces the results into a more compact package',
-        action='store_true')
+        action='store_true'
+    )
     parser.add_argument(
         '-u',
         '--urls',
         help='Pass in URLs to monitor',
         nargs='+',
         type=str,
-        action='extend')
+        action='extend'
+    )
 
     args = parser.parse_args()
     val_dict = make_value_dict(args.symbolic)
@@ -63,16 +65,24 @@ def main():
         stats = map(lambda url: (url, get_status_code(url) == codes.ok),
                     args.urls)
         if args.compact:
-            failed = list(filter(lambda url_pr: not url_pr[1], stats))
-            count = reduce(count_stats, map(lambda url_pr: url_pr[1], stats))
-            count_str = f"{val_dict[True]}: {count[0]}"
-            failed_str = f" {val_dict[False]}: {failed.join(' ')}"
-            res = count_str + failed_str
-        else:
-            res = list(
-                map(lambda url_pr: f"{url_pr[0]}: {val_dict(url_pr[1])}"))
+            failed = []
+            count = [0, 0]
+            for url, is_ok in stats:
+                if is_ok:
+                    count[0] += 1
+                else:
+                    count[1] += 1
+                    failed.append(url)
 
-        res = list(stats)
+            count_str = f"{val_dict[True]}: {count[0]}"
+            failed_str = f"{val_dict[False]}: {' '.join(failed)}"
+            res = count_str + " " + failed_str
+        else:
+            res = ' '.join(list(
+                map(lambda url_pr: f"{url_pr[0]}: {val_dict[url_pr[1]]}",
+                    stats)
+            ))
+
     else:
         res = "Please pass in valid urls you would like to monitor"
 
