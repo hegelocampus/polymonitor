@@ -7,7 +7,14 @@ Polymonitor can be used as a stand alone CLI tool to quickly check the status of
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install polymonitor.
 
 ```bash
-pip install polymonitor
+$ pip install polymonitor
+```
+
+Alternatively you can clone the git repository and use [Poetry](https://python-poetry.org/docs/) to install it.
+```bash
+$ git clone https://github.com/hegelocampus/polymonitor
+$ cd polymonitor
+$ poetry install
 ```
 
 ## Usage

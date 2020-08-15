@@ -7,10 +7,10 @@ from validators import url as valid_url
 from termcolor import colored
 
 
-def make_value_dict(is_symbolic):
+def make_value_dict(symbolic):
     map_to_res = {
-        True: "\uf062" if is_symbolic else "Up",
-        False: "\uf98d" if is_symbolic else "Down"
+        True: "\uf062" if symbolic else "Up",
+        False: "\uf98d" if symbolic else "Down"
     }
 
     return map_to_res
