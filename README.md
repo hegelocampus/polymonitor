@@ -42,6 +42,18 @@ You can leave off the `-c` flag for more verbose output:
 $ polymonitor -cu duckduckgo.com google.com google.com/404
 google.com: Up google.com/404: Down duckduckgo.com: Up
 ```
+  
+### Polybar Use
+If you would like to use this tool in your polybar you need to add the following to your polybar config:
+```config
+[module/polymonitor]
+type = custom/script
+exec = polymonitor -cu duckduckgo.com google.com twitter.com cloudflare.com
+interval = 10800
+```
+This is what the above configuration will generate:  
+![Polybar Screenshot](/examples/polymonitor_polybar_example.png)
+**Note that if you are using this to ping your own web-pages, you may want to raise the interval to only refresh every couple hours.** The interval is specified in seconds so one hour would be `interval = 3600` and the above example would refresh every three hours.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
