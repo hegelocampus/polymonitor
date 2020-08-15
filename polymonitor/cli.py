@@ -86,7 +86,7 @@ def main():
                 failed_str += '0'
             res = count_str + " " + failed_str
         else:
-            res = ' '.join(list(
+            res = ', '.join(list(
                 map(lambda url_pr: f"{url_pr[0]}: {val_dict[url_pr[1]]}",
                     stats)
             ))
