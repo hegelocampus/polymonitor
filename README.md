@@ -30,6 +30,19 @@ optional arguments:
                         Pass in URLs to monitor
 ```
 
+A basic use case would be quickly printing the status of web-apps you'd like to check on:
+```bash
+$ polymonitor -cu duckduckgo.com google.com google.com/404
+Up: 2 Down: google.com/404
+```
+Note that you do not need to preface the URLs with a protocol (e.g., `https://`). If you do not provide a full URL `https://` will be prefixed to your URL before it is pinged.
+  
+You can leave off the `-c` flag for more verbose output:
+```bash
+$ polymonitor -cu duckduckgo.com google.com google.com/404
+google.com: Up google.com/404: Down duckduckgo.com: Up
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
