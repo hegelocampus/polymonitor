@@ -52,7 +52,7 @@ exec = polymonitor -cu duckduckgo.com google.com twitter.com cloudflare.com
 interval = 10800
 ```
 This is what the above configuration will generate:  
-![Polybar Screenshot](/examples/polymonitor_polybar_example.png)
+![Polybar Screenshot](/examples/polymonitor_polybar_example.png)  
 **Note that if you are using this to ping your own web-pages, you may want to raise the interval to only refresh every couple hours.** The interval is specified in seconds so one hour would be `interval = 3600` and the above example would refresh every three hours.
 
 ## Contributing
