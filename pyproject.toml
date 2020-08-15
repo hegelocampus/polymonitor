@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "polymonitor"
-version = "0.1.5"
+version = "0.1.6"
 description = "Polymonitor can be used as a stand alone CLI tool to quickly check the status of a URL or as a plugin for polybar."
 authors = ["Bee <bellis8099@gmail.com>"]
 license = "MIT"
